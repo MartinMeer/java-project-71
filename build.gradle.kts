@@ -6,6 +6,7 @@ plugins {
     id("se.patrikerdes.use-latest-versions") version "0.2.18"
     id("io.freefair.lombok") version "8.6"
 
+
 }
 
 group = "hexlet.code"
@@ -26,6 +27,7 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:1.18.32")
     testCompileOnly("org.projectlombok:lombok:1.18.32")
     testAnnotationProcessor("org.projectlombok:lombok:1.18.32")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.0.1")
 }
 
 
