@@ -12,20 +12,22 @@ import java.util.Map;
 public class FileToDiffer<K, V> {
 
     @Getter
-    private Map<K, V> fileToDiffer;
+    private final Map<K, V> fileToDiffer;
     @Setter
     private String path;
 
-    public FileToDiffer(String path) {
+    public FileToDiffer(String path) throws IOException {
         this.path = path;
-    }
-
-
-    public Map<K, V> parseToMap() throws IOException {
         File file = new File(path);
         ObjectMapper objectMapper = new ObjectMapper();
-        fileToDiffer = objectMapper.readValue(file, new TypeReference<>() {
-        });
-        return fileToDiffer;
+        this.fileToDiffer = objectMapper.readValue(file, new TypeReference<>() {});
     }
+
+
+//    public Map<K, V> parseToMap() throws IOException {
+//        File file = new File(path);
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        fileToDiffer = objectMapper.readValue(file, new TypeReference<>() {});
+//        return fileToDiffer;
+//    }
 }
