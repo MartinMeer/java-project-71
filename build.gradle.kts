@@ -20,12 +20,12 @@ application {
 
 dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:2.17.1")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.17.2")
     implementation("org.apache.commons:commons-lang3:3.14.0")
     implementation("org.apache.commons:commons-math3:3.6.1")
     implementation("info.picocli:picocli:4.7.6")
 
     //Lombok
-    annotationProcessor("info.picocli:picocli-codegen:4.7.6")
     compileOnly("org.projectlombok:lombok:1.18.32")
     annotationProcessor("org.projectlombok:lombok:1.18.32")
     testCompileOnly("org.projectlombok:lombok:1.18.32")
@@ -35,6 +35,10 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.26.0")
     testImplementation(platform("org.junit:junit-bom:5.10.2"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+
+    //other
+    annotationProcessor("info.picocli:picocli-codegen:4.7.6")
+
 }
 
 //tasks

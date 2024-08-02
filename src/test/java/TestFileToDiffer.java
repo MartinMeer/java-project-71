@@ -1,5 +1,4 @@
 import hexlet.code.FileToDiffer;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,11 +11,8 @@ public class TestFileToDiffer {
 
     @BeforeEach
     public void setUp() throws IOException {
-        file = new FileToDiffer<>("src/main/resources/file1.json");
+        file = new FileToDiffer<>("src/main/resources/file.yaml");
     }
-
-
-
     @Test
     public void testMap() {
         Map<String, String> expected = Map.of(
@@ -24,10 +20,10 @@ public class TestFileToDiffer {
                 "timeout", "50",
                 "proxy", "123.234.53.22",
                 "follow", "false");
-        var actual = file.getFileToDiffer();
+        var actual = file.getMapToDiffer();
 
-        assert(actual.containsKey("host"));
         assert(actual.size() == expected.size());
+        assert(actual.containsKey("host"));
         assert(actual.containsValue("123.234.53.22"));
         assert(actual.get("proxy").equals("123.234.53.22"));
 
