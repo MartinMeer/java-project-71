@@ -26,6 +26,7 @@ public class TestFileToDiffer {
         assert(actual.containsKey("host"));
         assert(actual.containsValue("123.234.53.22"));
         assert(actual.get("proxy").equals("123.234.53.22"));
-
     }
+
+
 }
