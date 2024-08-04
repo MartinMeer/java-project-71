@@ -14,8 +14,8 @@ public class TestDiffer {
 
     @Test
     public void testDifferJSON() throws IOException {
-        file1 = new FileToDiffer<>("src/main/resources/file1.json");
-        file2 = new FileToDiffer<>("src/main/resources/file2.json");
+        file1 = new FileToDiffer<>("src/test/resources/file1.json");
+        file2 = new FileToDiffer<>("src/test/resources/file2.json");
         String expected = "{add=[{timeout=20}, {verbose=true}], const=[{host=hexlet.io}], del=[{timeout=50}, {proxy=123.234.53.22}, {follow=false}]}";
         String actual = Differ.generate(file1, file2);
         assertEquals(actual, expected);
@@ -23,16 +23,16 @@ public class TestDiffer {
 
     @Test
     public void testDifferYAML() throws IOException {
-        file1 = new FileToDiffer<>("src/main/resources/file1.yaml");
-        file2 = new FileToDiffer<>("src/main/resources/file2.yaml");
+        file1 = new FileToDiffer<>("src/test/resources/file1.yaml");
+        file2 = new FileToDiffer<>("src/test/resources/file2.yaml");
         String expected = "{add=[{timeout=20}, {verbose=true}], const=[{host=hexlet.io}], del=[{timeout=50}, {proxy=123.234.53.22}, {follow=false}]}";
         String actual = Differ.generate(file1, file2);
         assertEquals(actual, expected);
     }
     @Test
     public void testDifferYML() throws IOException {
-        file1 = new FileToDiffer<>("src/main/resources/file1.yml");
-        file2 = new FileToDiffer<>("src/main/resources/file2.yml");
+        file1 = new FileToDiffer<>("src/test/resources/file1.yml");
+        file2 = new FileToDiffer<>("src/test/resources/file2.yml");
         String expected = "{add=[{timeout=20}, {verbose=true}], const=[{host=hexlet.io}], del=[{timeout=50}, {proxy=123.234.53.22}, {follow=false}]}";
         String actual = Differ.generate(file1, file2);
         assertEquals(actual, expected);
