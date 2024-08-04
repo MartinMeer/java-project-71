@@ -14,6 +14,7 @@ public class Differ {
         var listOfConst = new ArrayList<>();
         var listOfDel = new ArrayList<>();
         var listOfAdd = new ArrayList<>();
+
         map1.forEach((key, value) -> {
             if (map2.containsKey(key) && map2.containsValue(value)){
                 listOfConst.add(Map.of(key, value));
