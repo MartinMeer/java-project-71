@@ -9,3 +9,9 @@ dependency:
 	./gradlew dependencyUpdates
 doc:
 	./gradlew javadoc
+.PHONY: test
+test:
+	./gradlew test
+	./gradlew checkstyleMain
+	./gradlew checkstyleMain
+	./gradlew jacocoTestReport
