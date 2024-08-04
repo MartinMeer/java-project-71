@@ -11,7 +11,7 @@ public class TestFileToDiffer {
 
     @BeforeEach
     public void setUp() throws IOException {
-        file = new FileToDiffer<>("src/main/resources/file.yaml");
+        file = new FileToDiffer<>("src/main/resources/file1.yaml");
     }
     @Test
     public void testMap() {

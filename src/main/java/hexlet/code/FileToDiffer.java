@@ -5,7 +5,6 @@ import lombok.Setter;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Map;
 
 public class FileToDiffer<K, V> {

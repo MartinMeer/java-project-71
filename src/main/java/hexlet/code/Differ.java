@@ -1,6 +1,5 @@
 package hexlet.code;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,13 +7,6 @@ import java.util.Map;
 
 public class Differ {
 
-    /*private static FileToDiffer file1;
-    private static FileToDiffer file2;
-
-    public Differ(FileToDiffer file1, FileToDiffer file2) {
-        this.file1 = file1;
-        this.file2 = file2;
-    }*/
     public static String generate(FileToDiffer file1, FileToDiffer file2) {
         var map1 = file1.getMapToDiffer();
         var map2 = file2.getMapToDiffer();
@@ -42,8 +34,4 @@ public class Differ {
         mapOfDiffers.put("add", listOfAdd);
         return mapOfDiffers.toString();
     }
-
-
-
-
 }
