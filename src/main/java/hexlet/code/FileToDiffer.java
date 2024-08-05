@@ -8,10 +8,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FileToDiffer<K, V> {
+public class FileToDiffer<V> {
 
     @Getter
-    private final Map<K, V> mapToDiffer;
+    private final Map<String, V> mapToDiffer;
     @Setter
     private String path;
 

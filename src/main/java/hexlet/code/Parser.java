@@ -9,14 +9,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class Parser<K, V> {
+public final class Parser {
 
-    public static <K, V> Map<K, V> jsonMapper(File file) throws IOException {
+    public static <V> Map<String, V> jsonMapper(File file) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(file, new TypeReference<>() {});
     }
 
-    public static <K, V> Map<K, V> yamlMapper(File file) throws IOException {
+    public static <V> Map<String, V> yamlMapper(File file) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
         objectMapper.findAndRegisterModules();
         return objectMapper.readValue(file, new TypeReference<>() {});
