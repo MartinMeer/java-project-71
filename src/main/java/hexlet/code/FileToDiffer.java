@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 public class FileToDiffer<K, V> {
@@ -20,8 +21,8 @@ public class FileToDiffer<K, V> {
         String[] splittedFileType = path.split("\\.");
         String fileType = splittedFileType[splittedFileType.length - 1];
         switch (fileType) {
-            case "json" -> this.mapToDiffer = Parser.jsonMapper(file);
-            case ("yml"), ("yaml") -> this.mapToDiffer = Parser.yamlMapper(file);
+            case "json" -> this.mapToDiffer = new HashMap<>(Parser.jsonMapper(file));
+            case ("yml"), ("yaml") -> this.mapToDiffer = new HashMap<>(Parser.yamlMapper(file));
             default -> throw new IOException("Unsupported format.");
         }
     }

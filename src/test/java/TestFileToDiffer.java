@@ -3,18 +3,20 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 public class TestFileToDiffer {
 
     FileToDiffer file;
 
-    @BeforeEach
+    /*@BeforeEach
     public void setUp() throws IOException {
         file = new FileToDiffer<>("src/test/resources/file1.yaml");
-    }
+    }*/
     @Test
-    public void testMap() {
+    public void testMapFromJSON() throws IOException {
+        file = new FileToDiffer<>("src/test/resources/file1.json");
         Map<String, String> expected = Map.of(
                 "host", "hexlet.io",
                 "timeout", "50",
@@ -26,6 +28,33 @@ public class TestFileToDiffer {
         assert(actual.containsKey("host"));
         assert(actual.containsValue("123.234.53.22"));
         assert(actual.get("proxy").equals("123.234.53.22"));
+    }
+    /*@Test
+    public void testMapWithNullKey() throws IOException {
+        file = new FileToDiffer<>("src/test/resources/fileWithNullValue.json");
+        Map<String, String> expected = Map.of(
+                "host", null);
+        var actual = file.getMapToDiffer();
+
+        assert(actual.size() == expected.size());
+        assert(actual.containsKey("host"));
+        assert(actual.containsValue(null));
+        assert(actual.get("host").equals(null));
+    }*/
+    @Test
+    public void testMapWithNullKeyByHashMap() throws IOException {
+        file = new FileToDiffer<>("src/test/resources/fileWithNullValue.json");
+        var expected = new HashMap<>();
+        expected.put("host", null);
+        expected.put("path", "file");
+        var actual = file.getMapToDiffer();
+
+        assert(actual.size() == expected.size());
+        assert(actual.containsKey("host"));
+        assert(actual.containsValue(null));
+        assert(actual.containsKey("path"));
+        assert(actual.containsValue("file"));
+        //assert(actual.get("host").equals(null));
     }
 
 
