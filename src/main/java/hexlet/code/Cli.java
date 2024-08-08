@@ -1,4 +1,5 @@
 package hexlet.code;
+import java.util.Formatter;
 import java.util.concurrent.Callable;
 
 import static picocli.CommandLine.*;
@@ -23,8 +24,9 @@ public class Cli implements Callable {
 
     @Override
     public Object call() throws Exception {
-
-
+        FileToDiffer file1 = new FileToDiffer<>(filepath1);
+        FileToDiffer file2 = new FileToDiffer<>(filepath2);
+        System.out.println(Differ.generate(file1, file2, format));
         return null;
     }
 }

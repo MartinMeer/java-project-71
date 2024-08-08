@@ -1,12 +1,25 @@
 package hexlet.code;
 
+import hexlet.code.formatters.Formatter;
+import hexlet.code.formatters.Plain;
+
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Differ {
 
-    public static <V> String generate(FileToDiffer file1, FileToDiffer file2) {
+    private static Map mapOfDiffers;
+
+    public static String generate(FileToDiffer file1, FileToDiffer file2, Formatter format) {
+        Formatter formatter = new Plain(format);
+        var mapOfDiffers = collectMapOfDiffers(file1, file2);
+        String differ = formatter.toFormat(mapOfDiffers);
+        return differ;
+    }
+
+    public static <V> HashMap<String, List> collectMapOfDiffers(FileToDiffer file1, FileToDiffer file2) {
         var map1 = new HashMap<String, V>(file1.getMapToDiffer()).entrySet();
         var map2 = new HashMap<String, V>(file2.getMapToDiffer()).entrySet();
 
@@ -26,6 +39,6 @@ public class Differ {
         mapOfDiffers.put("matched", matched);
         mapOfDiffers.put("deleted", deleted);
         mapOfDiffers.put("added", added);
-        return mapOfDiffers.toString();
+        return mapOfDiffers;
     }
 }
