@@ -7,7 +7,7 @@ import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TestCli {
+public class TestDiffer {
 
     static String expected;
     static Path pathToExpected;
@@ -28,7 +28,7 @@ public class TestCli {
         filepath1 = "src/test/resources/fixtures/file1.json";
         filepath2 = "src/test/resources/fixtures/file2.json";
     }
-    public static void callCli(String inputFileType) throws IOException {
+    public static void callDiffer(String inputFileType) throws IOException {
         if (inputFileType.equals("yml")) {
             setUpYml();
         } else if (inputFileType.equals("yaml")) {
@@ -45,11 +45,11 @@ public class TestCli {
         format = "plain";
         pathToExpected = Path.of("src/test/resources/fixtures/result_plain.txt");
         expected = Files.readString(pathToExpected);
-        callCli("yml");
+        callDiffer("yml");
         assertEquals(expected, diff);
-        callCli("yaml");
+        callDiffer("yaml");
         assertEquals(expected, diff);
-        callCli("json");
+        callDiffer("json");
         assertEquals(expected, diff);
     }
 
@@ -58,11 +58,11 @@ public class TestCli {
         format = "stylish";
         pathToExpected = Path.of("src/test/resources/fixtures/result_stylish.txt");
         expected = Files.readString(pathToExpected);
-        callCli("yml");
+        callDiffer("yml");
         assertEquals(expected, diff);
-        callCli("yaml");
+        callDiffer("yaml");
         assertEquals(expected, diff);
-        callCli("json");
+        callDiffer("json");
         assertEquals(expected, diff);
     }
 
@@ -71,19 +71,27 @@ public class TestCli {
         format = "json";
         pathToExpected = Path.of("src/test/resources/fixtures/result_json.json");
         expected = Files.readString(pathToExpected);
-        callCli("yml");
+        callDiffer("yml");
         assertEquals(expected, diff);
-        callCli("yaml");
+        callDiffer("yaml");
         assertEquals(expected, diff);
-        callCli("json");
+        callDiffer("json");
         assertEquals(expected, diff);
     }
 
     @Test
-    public void testWrongFormatInput() throws IOException {
+    public void testWrongFormatInput() {
         format = "smth";
         pathToExpected = Path.of("src/test/resources/fixtures/result_json.json");
-        Exception expectedEx = assertThrows(IOException.class, () -> callCli("yml"));
+        Exception expectedEx = assertThrows(IOException.class, () -> callDiffer("yml"));
         assertEquals("Wrong format! \"plain\", \"stylish\" and \"json\" formats only", expectedEx.getMessage());
+    }
+
+    @Test
+    public void testDiffer() throws IOException {
+        setUpYaml();
+        pathToExpected = Path.of("src/test/resources/fixtures/result_stylish.txt");
+        expected = Files.readString(pathToExpected);
+        diff = Differ.generate(filepath1, filepath2);
     }
 }
