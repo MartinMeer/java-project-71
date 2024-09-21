@@ -1,3 +1,4 @@
+import hexlet.code.Differ;
 import hexlet.code.DifferMaker;
 import hexlet.code.FileToDiffer;
 import hexlet.code.formatters.Format;
@@ -11,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestFormatter {
@@ -22,23 +24,47 @@ public class TestFormatter {
     static String actual;
     static String expected;
     static Path pathToExpected;
-    String format;
 
-    @BeforeAll
-    public static void setUp() throws IOException {
-        file1 = new FileToDiffer<>("src/test/resources/fixtures/file1.yml");
-        file2 = new FileToDiffer<>("src/test/resources/fixtures/file2.yml");
-        mapOfDiffers = DifferMaker.makeMapOfDiff(file1, file2);
+    static String format;
+    static String diff;
+    static String filepath1;
+    static String filepath2;
+    static String[] fileType = {"yml", "yaml", "json", "smth"};
+
+
+    public static void setUpYml() {
+        filepath1 = "src/test/resources/fixtures/file1.yml";
+        filepath2 = "src/test/resources/fixtures/file2.yml";
+    }
+    public static void setUpYaml() {
+        filepath1 = "src/test/resources/fixtures/file1.yaml";
+        filepath2 = "src/test/resources/fixtures/file2.yaml";
+    }
+    public static void setUpJson() {
+        filepath1 = "src/test/resources/fixtures/file1.json";
+        filepath2 = "src/test/resources/fixtures/file2.json";
+    }
+    public static void callCli(String inputFileType) throws IOException {
+        inputFileType = fileType;
+        if (inputFileType.equals("yml")) {
+            setUpYml();
+        } else if (inputFileType.equals("yaml")) {
+            setUpYaml();
+        } else if (inputFileType.equals("json")) {
+            setUpJson();
+        }
+        Differ.setFormat(format);
+        diff = Differ.generate(filepath1, filepath2);
     }
 
     @Test
     public void testPlain() throws IOException {
         format = "plain";
-        formatter = Formatter.switchFormat(format, mapOfDiffers);
-        pathToExpected = Path.of("src/test/resources/fixtures/result_plain.txt");
-        actual = formatter.toFormat();
+        fileType = "yml";
+        callCli(fileType);
+
         expected = Files.readString(pathToExpected);
-        assertEquals(expected, actual);
+        assertThat();
     }
 
     @Test

@@ -31,10 +31,4 @@ public class Differ {
     public static void setFormat(String format) {
         Differ.format = format;
     }
-    /*public static void setFormatter(String format) {
-        format = format;
-        formatter = Formatter.switchFormat(format, mapOfDiffers);
-    }*/
-
-
 }
