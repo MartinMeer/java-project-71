@@ -17,7 +17,7 @@ public class Differ {
     private static Format formatter;
     private static FileToDiffer file1;
     private static FileToDiffer file2;
-    private static String format;
+    private static String format = "stylish";
 
 
     public static String generate(String filepath1, String filepath2) throws IOException {

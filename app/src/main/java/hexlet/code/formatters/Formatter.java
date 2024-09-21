@@ -1,5 +1,6 @@
 package hexlet.code.formatters;
 
+import java.io.IOException;
 import java.util.Map;
 public class Formatter {
 
@@ -7,7 +8,7 @@ public class Formatter {
     private static final String STYLISH = "stylish";
     private static final String JSON = "json";
 
-    public static Format switchFormat(String format, Map mapOfDiffers) {
+    public static Format switchFormat(String format, Map mapOfDiffers) throws IOException {
         switch (format) {
             case "plain" -> {
                 return new Plain(mapOfDiffers);
@@ -15,8 +16,11 @@ public class Formatter {
             case "json" -> {
                 return new Json(mapOfDiffers);
             }
-            default -> {
+            case "stylish" -> {
                 return new Stylish(mapOfDiffers);
+            }
+            default -> {
+                throw new IOException("Wrong format! \"plain\", \"stylish\" and \"json\" formats only");
             }
         }
     }

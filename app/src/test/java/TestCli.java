@@ -1,36 +1,20 @@
 import hexlet.code.Differ;
-import hexlet.code.DifferMaker;
-import hexlet.code.FileToDiffer;
-import hexlet.code.formatters.Format;
-import hexlet.code.formatters.Formatter;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class TestFormatter {
+public class TestCli {
 
-    private static Map mapOfDiffers;
-    static FileToDiffer file1;
-    static FileToDiffer file2;
-    private static Format formatter;
-    static String actual;
     static String expected;
     static Path pathToExpected;
-
-    static String format;
+    static String format = "stylish";
     static String diff;
     static String filepath1;
     static String filepath2;
-    static String[] fileType = {"yml", "yaml", "json", "smth"};
-
 
     public static void setUpYml() {
         filepath1 = "src/test/resources/fixtures/file1.yml";
@@ -45,7 +29,6 @@ public class TestFormatter {
         filepath2 = "src/test/resources/fixtures/file2.json";
     }
     public static void callCli(String inputFileType) throws IOException {
-        inputFileType = fileType;
         if (inputFileType.equals("yml")) {
             setUpYml();
         } else if (inputFileType.equals("yaml")) {
@@ -60,30 +43,47 @@ public class TestFormatter {
     @Test
     public void testPlain() throws IOException {
         format = "plain";
-        fileType = "yml";
-        callCli(fileType);
-
+        pathToExpected = Path.of("src/test/resources/fixtures/result_plain.txt");
         expected = Files.readString(pathToExpected);
-        assertThat();
+        callCli("yml");
+        assertEquals(expected, diff);
+        callCli("yaml");
+        assertEquals(expected, diff);
+        callCli("json");
+        assertEquals(expected, diff);
     }
 
     @Test
     public void testStylish() throws IOException {
         format = "stylish";
-        formatter = Formatter.switchFormat(format, mapOfDiffers);
         pathToExpected = Path.of("src/test/resources/fixtures/result_stylish.txt");
-        actual = formatter.toFormat();
         expected = Files.readString(pathToExpected);
-        assertEquals(expected, actual);
+        callCli("yml");
+        assertEquals(expected, diff);
+        callCli("yaml");
+        assertEquals(expected, diff);
+        callCli("json");
+        assertEquals(expected, diff);
     }
 
     @Test
     public void testJson() throws IOException {
         format = "json";
-        formatter = Formatter.switchFormat(format, mapOfDiffers);
         pathToExpected = Path.of("src/test/resources/fixtures/result_json.json");
-        actual = formatter.toFormat();
         expected = Files.readString(pathToExpected);
-        assertEquals(expected, actual);
+        callCli("yml");
+        assertEquals(expected, diff);
+        callCli("yaml");
+        assertEquals(expected, diff);
+        callCli("json");
+        assertEquals(expected, diff);
+    }
+
+    @Test
+    public void testWrongFormatInput() throws IOException {
+        format = "smth";
+        pathToExpected = Path.of("src/test/resources/fixtures/result_json.json");
+        Exception expectedEx = assertThrows(IOException.class, () -> callCli("yml"));
+        assertEquals("Wrong format! \"plain\", \"stylish\" and \"json\" formats only", expectedEx.getMessage());
     }
 }

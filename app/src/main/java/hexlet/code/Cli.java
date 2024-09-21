@@ -17,7 +17,7 @@ public class Cli implements Callable {
     @CommandLine.Option(names = {"-f", "--format"},
             paramLabel = "format",
             description = "output format [default: stylish]")
-    private String format;
+    private String format = "stylish";
 
     @CommandLine.Parameters(index = "0", paramLabel = "filepath1", description = "path to first file")
     private String filepath1;
