@@ -21,6 +21,7 @@ public class Differ {
 
 
     public static String generate(String filepath1, String filepath2) throws IOException {
+
         file1 = new FileToDiffer<>(filepath1);
         file2 = new FileToDiffer<>(filepath2);
         mapOfDiffers = makeMapOfDiff(file1, file2);

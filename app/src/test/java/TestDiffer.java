@@ -15,6 +15,7 @@ public class TestDiffer {
     static String diff;
     static String filepath1;
     static String filepath2;
+    Exception expectedEx;
 
     public static void setUpYml() {
         filepath1 = "src/test/resources/fixtures/file1.yml";
@@ -28,6 +29,10 @@ public class TestDiffer {
         filepath1 = "src/test/resources/fixtures/file1.json";
         filepath2 = "src/test/resources/fixtures/file2.json";
     }
+    public static void setUpUnsupported() {
+        filepath1 = "src/test/resources/fixtures/file1.xml";
+        filepath2 = "src/test/resources/fixtures/file2.xml";
+    }
     public static void callDiffer(String inputFileType) throws IOException {
         if (inputFileType.equals("yml")) {
             setUpYml();
@@ -35,6 +40,8 @@ public class TestDiffer {
             setUpYaml();
         } else if (inputFileType.equals("json")) {
             setUpJson();
+        } else if (inputFileType.equals("unsupported")) {
+            setUpUnsupported();
         }
         Differ.setFormat(format);
         diff = Differ.generate(filepath1, filepath2);
@@ -78,20 +85,40 @@ public class TestDiffer {
         callDiffer("json");
         assertEquals(expected, diff);
     }
+    @Test
+    public void testDefault() throws IOException {
+        //format = "plain";
+        pathToExpected = Path.of("src/test/resources/fixtures/result_plain.txt");
+        expected = Files.readString(pathToExpected);
+        callDiffer("yml");
+        assertEquals(expected, diff);
+        callDiffer("yaml");
+        assertEquals(expected, diff);
+        callDiffer("json");
+        assertEquals(expected, diff);
+    }
 
     @Test
     public void testWrongFormatInput() {
         format = "smth";
         pathToExpected = Path.of("src/test/resources/fixtures/result_json.json");
-        Exception expectedEx = assertThrows(IOException.class, () -> callDiffer("yml"));
-        assertEquals("Wrong format! \"plain\", \"stylish\" and \"json\" formats only", expectedEx.getMessage());
+        expected = "Wrong output format! \"plain\", \"stylish\" and \"json\" formats only.";
+        expectedEx = assertThrows(IOException.class, () -> callDiffer("yml"));
+        assertEquals(expected, expectedEx.getMessage());
+    }
+    @Test
+    public void testWrongFileInput() {
+        expectedEx = assertThrows(IOException.class, () -> callDiffer("unsupported"));
+        expected = "Unsupported file format. JSON and YAML formats only.";
+        assertEquals(expected, expectedEx.getMessage());
     }
 
     @Test
     public void testDiffer() throws IOException {
-        setUpYaml();
+        setUpJson();
         pathToExpected = Path.of("src/test/resources/fixtures/result_stylish.txt");
         expected = Files.readString(pathToExpected);
         diff = Differ.generate(filepath1, filepath2);
+        assertEquals(expected, diff);
     }
 }

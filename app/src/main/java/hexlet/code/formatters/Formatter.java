@@ -20,7 +20,7 @@ public class Formatter {
                 return new Stylish(mapOfDiffers);
             }
             default -> {
-                throw new IOException("Wrong format! \"plain\", \"stylish\" and \"json\" formats only");
+                throw new IOException("Wrong output format! \"plain\", \"stylish\" and \"json\" formats only.");
             }
         }
     }
