@@ -30,7 +30,7 @@ jobs:
       with:
         gradle-version: current
         
-    - working-directory: ./app
+    #- working-directory: ./app
     - run: gradle build --dry-run
     - run: echo "The current Gradle version was ${{ steps.setup-gradle.outputs.gradle-version }}"
           
