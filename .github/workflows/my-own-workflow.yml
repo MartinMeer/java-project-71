@@ -62,9 +62,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    defaults:
-      run:      
-        working-directory: ./app
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 21
@@ -74,6 +71,8 @@ jobs:
           distribution: temurin
       - name: Generate and submit dependency graph        
         uses: gradle/actions/dependency-submission@417ae3ccd767c252f5661f1ace9f835f9654f2b5
+        with:
+          build-root-directory: ./app
         
         
   snyk:
