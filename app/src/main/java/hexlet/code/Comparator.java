@@ -3,7 +3,7 @@ package hexlet.code;
 import java.util.HashMap;
 import java.util.TreeMap;
 
-public class DifferMaker {
+public class Comparator {
     public static <V> HashMap<String, TreeMap<String, V>> makeMapOfDiff(FileToDiffer<V> file1, FileToDiffer<V> file2) {
         var map1 = new HashMap<>(file1.getMapToDiffer()).entrySet();
         var map2 = new HashMap<>(file2.getMapToDiffer()).entrySet();

@@ -11,7 +11,7 @@ public class TestDiffer {
 
     static String expected;
     static Path pathToExpected;
-    static String format = "stylish";
+    static String formatName = "stylish";
     static String diff;
     static String filepath1;
     static String filepath2;
@@ -43,13 +43,13 @@ public class TestDiffer {
         } else if (inputFileType.equals("unsupported")) {
             setUpUnsupported();
         }
-        Differ.setFormat(format);
-        diff = Differ.generate(filepath1, filepath2);
+        //Differ.setFormatName(format);
+        diff = Differ.generate(filepath1, filepath2, formatName);
     }
 
     @Test
     public void testPlain() throws IOException {
-        format = "plain";
+        formatName = "plain";
         pathToExpected = Path.of("src/test/resources/fixtures/result_plain.txt");
         expected = Files.readString(pathToExpected);
         callDiffer("yml");
@@ -62,7 +62,7 @@ public class TestDiffer {
 
     @Test
     public void testStylish() throws IOException {
-        format = "stylish";
+        formatName = "stylish";
         pathToExpected = Path.of("src/test/resources/fixtures/result_stylish.txt");
         expected = Files.readString(pathToExpected);
         callDiffer("yml");
@@ -75,7 +75,7 @@ public class TestDiffer {
 
     @Test
     public void testJson() throws IOException {
-        format = "json";
+        formatName = "json";
         pathToExpected = Path.of("src/test/resources/fixtures/result_json.json");
         expected = Files.readString(pathToExpected);
         callDiffer("yml");
@@ -87,8 +87,7 @@ public class TestDiffer {
     }
     @Test
     public void testDefault() throws IOException {
-        //format = "plain";
-        pathToExpected = Path.of("src/test/resources/fixtures/result_plain.txt");
+        pathToExpected = Path.of("src/test/resources/fixtures/result_stylish.txt");
         expected = Files.readString(pathToExpected);
         callDiffer("yml");
         assertEquals(expected, diff);
@@ -100,8 +99,7 @@ public class TestDiffer {
 
     @Test
     public void testWrongFormatInput() {
-        format = "smth";
-        pathToExpected = Path.of("src/test/resources/fixtures/result_json.json");
+        formatName = "smth";
         expected = "Wrong output format! \"plain\", \"stylish\" and \"json\" formats only.";
         expectedEx = assertThrows(IOException.class, () -> callDiffer("yml"));
         assertEquals(expected, expectedEx.getMessage());
