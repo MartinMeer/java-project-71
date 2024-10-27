@@ -28,6 +28,7 @@ public class Cli implements Callable {
     @Override
     public Object call() throws Exception {
         //Differ.setFormatName(format);
+        Differ differ = new Differ(filepath1, filepath2);
         String diff = Differ.generate(filepath1, filepath2, formatName);
         System.out.println(diff);
         return null;

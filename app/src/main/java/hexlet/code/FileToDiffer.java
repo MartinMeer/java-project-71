@@ -15,7 +15,7 @@ public class FileToDiffer<V> {
         this.mapToDiffer = switchParser(path);
     }
 
-    private Map<String, V> switchParser(String path) throws IOException {
+    /*private Map<String, V> switchParser(String path) throws IOException {
         File file = new File(path);
         String[] splittedFileType = path.split("\\.");
         String fileType = splittedFileType[splittedFileType.length - 1];
@@ -28,5 +28,5 @@ public class FileToDiffer<V> {
             }
             default -> throw new IOException("Unsupported file format. JSON and YAML formats only.");
         }
-    }
+    }*/
 }
