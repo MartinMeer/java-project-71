@@ -1,3 +1,4 @@
+/*
 package hexlet.code;
 
 import lombok.Getter;
@@ -10,12 +11,15 @@ import java.util.Map;
 public class FileToDiffer<V> {
 
     private final Map<String, V> mapToDiffer;
+    private final String filepath;
 
     public FileToDiffer(String path) throws IOException {
-        this.mapToDiffer = switchParser(path);
+        Parser parser = new Parser<>();
+        this.mapToDiffer = parser.parse();
     }
 
-    /*private Map<String, V> switchParser(String path) throws IOException {
+    */
+/*private Map<String, V> switchParser(String path) throws IOException {
         File file = new File(path);
         String[] splittedFileType = path.split("\\.");
         String fileType = splittedFileType[splittedFileType.length - 1];
@@ -28,5 +32,7 @@ public class FileToDiffer<V> {
             }
             default -> throw new IOException("Unsupported file format. JSON and YAML formats only.");
         }
-    }*/
+    }*//*
+
 }
+*/

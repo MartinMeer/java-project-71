@@ -11,15 +11,21 @@ import java.util.Map;
 
 public final class Parser<V> {
 
+    private final String filepath;
     private File file;
+    private String fileType;
 
-    public Parser(File file) {
-        this.file = file;
+    public Parser(String filepath) {
+        this.filepath = filepath;
     }
 
-    private Map<String, V> parse (File file) throws IOException {
-        String[] splittedFileType = path.split("\\.");
-        String fileType = splittedFileType[splittedFileType.length - 1];
+    private void trimFileType() {
+        String[] splittedFileType = filepath.split("\\.");
+        fileType = splittedFileType[splittedFileType.length - 1];
+    }
+
+    public Map<String, V> parse () throws IOException {
+        trimFileType();
         switch (fileType) {
             case "json" -> {
                 return new HashMap<>(jsonMapper(file));
@@ -31,12 +37,12 @@ public final class Parser<V> {
         }
     }
 
-    public Map<String, V> jsonMapper(File file) throws IOException {
+    private Map<String, V> jsonMapper(File file) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(file, new TypeReference<>() { });
     }
 
-    public Map<String, V> yamlMapper(File file) throws IOException {
+    private Map<String, V> yamlMapper(File file) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
         objectMapper.findAndRegisterModules();
         return objectMapper.readValue(file, new TypeReference<>() { });
