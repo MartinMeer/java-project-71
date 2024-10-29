@@ -6,13 +6,14 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
 public final class Parser<V> {
 
     private final String filepath;
-    private File file;
     private String fileType;
 
     public Parser(String filepath) {
@@ -26,6 +27,7 @@ public final class Parser<V> {
 
     public Map<String, V> parse () throws IOException {
         trimFileType();
+        File file = new File(filepath);
         switch (fileType) {
             case "json" -> {
                 return new HashMap<>(jsonMapper(file));

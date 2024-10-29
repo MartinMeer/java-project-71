@@ -13,21 +13,17 @@ public class Comparator<V> {
     private TreeMap<String, V> matched;
     private TreeMap<String, V> removed;
     private TreeMap<String, V> added;
-    private HashMap<String, TreeMap<String, V>> mapOfDiffers;
 
     public Comparator(Map<String, V> file1, Map<String, V> file2) {
         this.file1 = file1;
         this.file2 = file2;
     }
 
-    public HashMap<String, TreeMap<String, V>> getMapOfDiffers() {
-        makeMapOfDiff();
-        return mapOfDiffers;
-    }
-
-    private  void makeMapOfDiff() {
+    public HashMap<String, TreeMap<String, V>> makeMapOfDiff() {
+        HashMap<String, TreeMap<String, V>> mapOfDiffers = new HashMap<>();
         var map1 = new HashMap<>(file1).entrySet();
         var map2 = new HashMap<>(file2).entrySet();
+
         matched = file1.entrySet().stream()
                 .filter(map2::contains)
                 .collect(TreeMap::new, (result, entry)
@@ -46,5 +42,7 @@ public class Comparator<V> {
         mapOfDiffers.put("matched", matched);
         mapOfDiffers.put("removed", removed);
         mapOfDiffers.put("added", added);
+
+        return mapOfDiffers;
     }
 }

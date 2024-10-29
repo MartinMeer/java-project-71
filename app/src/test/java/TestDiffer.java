@@ -43,7 +43,6 @@ public class TestDiffer {
         } else if (inputFileType.equals("unsupported")) {
             setUpUnsupported();
         }
-        //Differ.setFormatName(format);
         diff = Differ.generate(filepath1, filepath2, formatName);
     }
 
