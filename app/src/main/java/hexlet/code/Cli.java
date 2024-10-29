@@ -3,8 +3,6 @@ package hexlet.code;
 import picocli.CommandLine;
 import java.util.concurrent.Callable;
 
-
-
 /*Usage: gendiff [-hV]
 Compares two configuration files and shows a difference.
   -h, --help      Show this help message and exit.
@@ -24,11 +22,8 @@ public class Cli implements Callable {
     @CommandLine.Parameters(index = "1", paramLabel = "filepath2", description = "path to second file")
     private String filepath2;
 
-
     @Override
     public Object call() throws Exception {
-        //Differ.setFormatName(format);
-        Differ differ = new Differ(filepath1, filepath2);
         String diff = Differ.generate(filepath1, filepath2, formatName);
         System.out.println(diff);
         return null;
