@@ -20,7 +20,6 @@ public class Differ {
         file1 = parser1.parse();
         file2 = parser2.parse();
         Comparator comparator = new Comparator(file1, file2);
-        comparator.makeMapOfDiff();
         mapOfDiffers = comparator.makeMapOfDiff();
         formatter = Formatter.switchFormat(formatName, mapOfDiffers);
         return formatter.toFormat();

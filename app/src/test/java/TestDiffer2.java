@@ -5,9 +5,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class TestDiffer {
+public class TestDiffer2 {
 
     static String expected;
     static Path pathToExpected;
@@ -88,8 +89,11 @@ public class TestDiffer {
     public void testDefault() throws IOException {
         pathToExpected = Path.of("src/test/resources/fixtures/result_stylish.txt");
         expected = Files.readString(pathToExpected);
-        setUpJson();
-        diff = Differ.generate(filepath1, filepath2);
+        callDiffer("yml");
+        assertEquals(expected, diff);
+        callDiffer("yaml");
+        assertEquals(expected, diff);
+        callDiffer("json");
         assertEquals(expected, diff);
     }
 
