@@ -5,7 +5,7 @@ import hexlet.code.formatters.Formatter;
 import java.io.IOException;
 import java.util.Map;
 
-public class Differ {
+public final class Differ {
 
     private static Format formatter;
     private static Map file1;

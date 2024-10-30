@@ -3,7 +3,7 @@ package hexlet.code.formatters;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Stylish<V> implements Format {
+public final class Stylish<V> implements Format {
 
     private final Map<String, TreeMap<String, V>> mapOfDiffers;
 

@@ -6,7 +6,7 @@ import java.util.TreeMap;
 
 
 
-public class Comparator<V> {
+public final class Comparator<V> {
 
     private final Map<String, V> file1;
     private final Map<String, V> file2;

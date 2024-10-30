@@ -10,7 +10,7 @@ Compares two configuration files and shows a difference.
 
 @CommandLine.Command(name = "gendiff", mixinStandardHelpOptions = true, version = "gendiff 1.0",
         description = "Compares two configuration files and shows a difference.")
-public class Cli implements Callable {
+public final class Cli implements Callable {
 
     @CommandLine.Option(names = {"-f", "--format"},
             paramLabel = "format",

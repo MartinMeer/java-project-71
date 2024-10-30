@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 
-public class Plain<T> implements Format {
+public final class Plain<T> implements Format {
 
     private final Map<String, TreeMap<String, T>> mapOfDiffers;
 
