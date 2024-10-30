@@ -10,9 +10,6 @@ public final class Comparator<V> {
 
     private final Map<String, V> file1;
     private final Map<String, V> file2;
-    private TreeMap<String, V> matched;
-    private TreeMap<String, V> removed;
-    private TreeMap<String, V> added;
 
     public Comparator(Map<String, V> file1, Map<String, V> file2) {
         this.file1 = file1;
@@ -24,17 +21,17 @@ public final class Comparator<V> {
         var map1 = new HashMap<>(file1).entrySet();
         var map2 = new HashMap<>(file2).entrySet();
 
-        matched = file1.entrySet().stream()
+        TreeMap<String, V> matched = file1.entrySet().stream()
                 .filter(map2::contains)
                 .collect(TreeMap::new, (result, entry)
                         -> result.put(entry.getKey(), entry.getValue()), TreeMap::putAll);
 
-        removed = map1.stream()
+        TreeMap<String, V> removed = map1.stream()
                 .filter(e -> !map2.contains(e))
                 .collect(TreeMap::new, (result, entry)
                         -> result.put(entry.getKey(), entry.getValue()), TreeMap::putAll);
 
-        added = map2.stream()
+        TreeMap<String, V> added = map2.stream()
                 .filter(e -> !map1.contains(e))
                 .collect(TreeMap::new, (result, entry)
                         -> result.put(entry.getKey(), entry.getValue()), TreeMap::putAll);

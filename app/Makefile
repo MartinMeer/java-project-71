@@ -11,7 +11,6 @@ dependency:
 	./gradlew dependencyUpdates
 doc:
 	./gradlew javadoc
-
 run-test:
 	./gradlew test
 	./gradlew checkstyleMain
