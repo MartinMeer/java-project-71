@@ -17,17 +17,6 @@ public class Plain<T> implements Format {
     @Override
     public String toFormat() {
 
-       /* final String[] keyUpdated = {""};
-        final String[] keyRemoved = {""};
-        final String[] keyAdded = {""};
-
-        final String[] valueRemoved = {""};
-        final String[] valueAdded = {""};*/
-
-        //String patternUpdated = keyUpdated + "' was updated. From " + valueRemoved + " to " + valueAdded +"\n";
-        //String patternAdded = keyAdded + "' was added with value: '" + valueAdded[0] + "'\n";
-        //String patternRemoved = keyRemoved + "' was removed\n";
-
         StringBuilder formattedDiffer = new StringBuilder();
         String prefix = "Property '";
         List<String> unsortedString = new ArrayList<>();
@@ -59,10 +48,10 @@ public class Plain<T> implements Format {
         unsortedString.stream()
                 .sorted()
                 .forEach(element -> formattedDiffer.append(prefix).append(element));
-        return formattedDiffer.toString();
+        return formattedDiffer.toString().trim();
     }
 
-    private <V> TreeMap<String, String> extractMapOfStrings(String key) {
+    private TreeMap<String, String> extractMapOfStrings(String key) {
         var extractedMap = mapOfDiffers.get(key);
         String complexValue = "[complex value]";
         TreeMap<String, String> mapOfStrings = new TreeMap<>();

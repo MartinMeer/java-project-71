@@ -29,7 +29,7 @@ public class Stylish<V> implements Format {
             String stringRepresentation = prefix + keyWithoutPrefix + ": " + value + "\n";
             formattedDiffer.append(stringRepresentation);
         });
-        return formattedDiffer + "}\n";
+        return formattedDiffer + "}";
     }
 
     private TreeMap<String, String> flattenMapWithSignedKeys() {
