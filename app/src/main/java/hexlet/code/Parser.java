@@ -6,8 +6,6 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +23,7 @@ public final class Parser<V> {
         fileType = splittedFileType[splittedFileType.length - 1];
     }
 
-    public Map<String, V> parse () throws IOException {
+    public Map<String, V> parse() throws IOException {
         trimFileType();
         File file = new File(filepath);
         switch (fileType) {

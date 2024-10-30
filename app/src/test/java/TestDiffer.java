@@ -5,17 +5,18 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestDiffer {
 
-    static String expected;
-    static Path pathToExpected;
-    static String formatName = "stylish";
-    static String diff;
-    static String filepath1;
-    static String filepath2;
-    Exception expectedEx;
+    private static String expected;
+    private static Path pathToExpected;
+    private static String formatName = "stylish";
+    private static String diff;
+    private static String filepath1;
+    private static String filepath2;
+    private Exception expectedEx;
 
     public static void setUpYml() {
         filepath1 = "src/test/resources/fixtures/file1.yml";

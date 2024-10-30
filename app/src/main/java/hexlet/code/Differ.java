@@ -14,14 +14,14 @@ public class Differ {
     private static String formatName;
 
 
-    public static String generate(String filepath1, String filepath2, String formatName) throws IOException {
+    public static String generate(String filepath1, String filepath2, String format) throws IOException {
         Parser parser1 = new Parser(filepath1);
         Parser parser2 = new Parser(filepath2);
         file1 = parser1.parse();
         file2 = parser2.parse();
         Comparator comparator = new Comparator(file1, file2);
         mapOfDiffers = comparator.makeMapOfDiff();
-        formatter = Formatter.switchFormat(formatName, mapOfDiffers);
+        formatter = Formatter.switchFormat(format, mapOfDiffers);
         return formatter.toFormat();
     }
     public static String generate(String filepath1, String filepath2) throws IOException {
