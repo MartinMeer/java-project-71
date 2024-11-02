@@ -16,7 +16,6 @@ public final class Plain<T> implements Format {
 
     @Override
     public String toFormat() {
-
         StringBuilder formattedDiffer = new StringBuilder();
         String prefix = "Property '";
         List<String> unsortedString = new ArrayList<>();

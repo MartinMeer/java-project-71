@@ -8,11 +8,6 @@ import java.io.IOException;
 import java.util.Map;
 
 public class Formatter {
-
-    /*private static final String PLAIN = "plain";
-    private static final String STYLISH = "stylish";
-    private static final String JSON = "json";*/
-
     public static Format switchFormat(String format, Map mapOfDiffers) throws IOException {
         switch (format) {
             case "plain" -> {

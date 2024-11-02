@@ -21,7 +21,7 @@ public final class Comparator<V> {
         var map1 = new HashMap<>(file1).entrySet();
         var map2 = new HashMap<>(file2).entrySet();
 
-        TreeMap<String, V> matched = file1.entrySet().stream()
+        TreeMap<String, V> matched = map1.stream()
                 .filter(map2::contains)
                 .collect(TreeMap::new, (result, entry)
                         -> result.put(entry.getKey(), entry.getValue()), TreeMap::putAll);
