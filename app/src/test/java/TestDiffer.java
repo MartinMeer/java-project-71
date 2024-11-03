@@ -1,5 +1,6 @@
 import hexlet.code.Differ;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,15 +11,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestDiffer {
 
+    private static String filepath1;
+    private static String filepath2;
+
     public static Path readFixturePath(String fileName) {
         Path pathToFixture = Paths.get("src/test/resources/fixtures", fileName);
         return pathToFixture.normalize();
     }
 
-    @Test
-    public void testPlainOverJson() throws IOException {
-        String filepath1 = readFixturePath("file1.json").toString();
-        String filepath2 = readFixturePath("file2.json").toString();
+    public static void setUpInputFiles(String fileType) {
+        filepath1 = readFixturePath("file1." + fileType).toString();
+        filepath2 = readFixturePath("file2." + fileType).toString();
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"json", "yml", "yaml"})
+    public void testPlain(String fileType) throws IOException {
+        setUpInputFiles(fileType);
         String formatName = "plain";
         Path pathToExpected = readFixturePath("result_plain.txt");
         String expected = Files.readString(pathToExpected);
@@ -26,21 +35,10 @@ public class TestDiffer {
         assertEquals(expected, actual);
     }
 
-    @Test
-    public void testPlainOverYaml() throws IOException {
-        String filepath1 = readFixturePath("file1.yaml").toString();
-        String filepath2 = readFixturePath("file2.yml").toString();
-        String formatName = "plain";
-        Path pathToExpected = readFixturePath("result_plain.txt");
-        String expected = Files.readString(pathToExpected);
-        String actual = Differ.generate(filepath1, filepath2, formatName);
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testStylishOverJson() throws IOException {
-        String filepath1 = readFixturePath("file1.json").toString();
-        String filepath2 = readFixturePath("file2.json").toString();
+    @ParameterizedTest
+    @ValueSource(strings = {"json", "yml", "yaml"})
+    public void testStylish(String fileType) throws IOException {
+        setUpInputFiles(fileType);
         String formatName = "stylish";
         Path pathToExpected = readFixturePath("result_stylish.txt");
         var expected = Files.readString(pathToExpected);
@@ -48,21 +46,10 @@ public class TestDiffer {
         assertEquals(expected, actual);
     }
 
-    @Test
-    public void testStylishOverYaml() throws IOException {
-        String filepath1 = readFixturePath("file1.yaml").toString();
-        String filepath2 = readFixturePath("file2.yml").toString();
-        String formatName = "stylish";
-        Path pathToExpected = readFixturePath("result_stylish.txt");
-        var expected = Files.readString(pathToExpected);
-        var actual = Differ.generate(filepath1, filepath2, formatName);
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testJsonOverJson() throws IOException {
-        String filepath1 = readFixturePath("file1.json").toString();
-        String filepath2 = readFixturePath("file2.json").toString();
+    @ParameterizedTest
+    @ValueSource(strings = {"json", "yml", "yaml"})
+    public void testJson(String fileType) throws IOException {
+        setUpInputFiles(fileType);
         String formatName = "json";
         Path pathToExpected = readFixturePath("result_json.json");
         var expected = Files.readString(pathToExpected);
@@ -70,22 +57,10 @@ public class TestDiffer {
         assertEquals(expected, actual);
     }
 
-    @Test
-    public void testJsonOverYaml() throws IOException {
-        String filepath1 = readFixturePath("file1.yaml").toString();
-        String filepath2 = readFixturePath("file2.yml").toString();
-        String formatName = "json";
-        Path pathToExpected = readFixturePath("result_json.json");
-        var expected = Files.readString(pathToExpected);
-        var actual = Differ.generate(filepath1, filepath2, formatName);
-        assertEquals(expected, actual);
-    }
-
-
-    @Test
-    public void testDefault() throws IOException {
-        String filepath1 = readFixturePath("file1.yaml").toString();
-        String filepath2 = readFixturePath("file2.yml").toString();
+    @ParameterizedTest
+    @ValueSource(strings = {"json", "yml", "yaml"})
+    public void testDefault(String fileType) throws IOException {
+        setUpInputFiles(fileType);
         Path pathToExpected = readFixturePath("result_stylish.txt");
         String expected = Files.readString(pathToExpected);
         String actual = Differ.generate(filepath1, filepath2);
