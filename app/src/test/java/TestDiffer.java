@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestDiffer {
+public final class TestDiffer {
 
     private static String filepath1;
     private static String filepath2;
